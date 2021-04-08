@@ -30,6 +30,5 @@ const generateRequests = (actions): string => {
     '',
   )}: <T>(data: T, options = {}) => request('${key}', { ...options, ...data }),`;
   });
-  console.log(requests);
   return requests;
 };

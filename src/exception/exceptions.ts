@@ -17,3 +17,14 @@ export class MethodNotAllowedError extends WindWakerError {
   name = 'MethodNotAllowed';
   code = 405;
 }
+
+export class BadRequestError extends WindWakerError {
+  name = 'BadRequest';
+  code = 400;
+  validationErrors;
+
+  constructor(validationErrors = []) {
+    super();
+    this.validationErrors = validationErrors;
+  }
+}

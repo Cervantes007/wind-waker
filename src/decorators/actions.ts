@@ -17,8 +17,11 @@ export const Action = (...pipes: Pipe[]) => (target, key, descriptor) => {
   const field = `${WK_PARAM}-${key}`;
   if (constructor[field]) {
     paramsMetadata = constructor[field];
-    handler = (ctx) => {
-      const params = paramsMetadata.map((fnParam) => fnParam(ctx));
+    handler = async (ctx) => {
+      const getParams = async () => {
+        return Promise.all(paramsMetadata.map((fnParam) => fnParam(ctx)));
+      };
+      const params = await getParams();
       return target[key].call(instance, ...params);
     };
   }
