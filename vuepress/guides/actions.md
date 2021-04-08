@@ -7,6 +7,8 @@ only thinking in the `Actions` you need.
 All incoming requests are map to the corresponding Action.
 An `Action` is responsible to handle a request and send back a response to client.
 
+![actions](./wind-waker-actions.png)
+
 ## Define your first Action
 
 To define an `Action` you need to create a file using the `.actions.ts` suffix,

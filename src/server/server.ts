@@ -9,11 +9,15 @@ import { actions } from '../actions/actions';
 
 export let __app: App;
 
+interface AppOptions {
+  pattern?: string;
+}
+
 export class App {
   private server: Server;
   private _pipes: Pipe[] = [];
 
-  constructor(options: any = {}) {
+  constructor(options: AppOptions = {}) {
     loadWindWakerFiles(options.pattern);
     this.server = createServer(requestListener);
     if (!__app) {

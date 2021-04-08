@@ -2,6 +2,8 @@
 
 A `Pipe` is a function to reuse common logic in your app or break down big logic into small pieces of codes.
 
+![App Overview](./wind-waker-app.png)
+
 :::tip Recommendation
 Learn about [Application](/basics/app.md) and [Actions](/basics/actions.md) before to read this section.
 :::
@@ -52,4 +54,27 @@ app.pipeline(logHeadersPipe, anotherPipe, ...);
 :::tip Pipeline order matter
 The pipes register in the pipeline will be executed in the exactly same order you pass in.
 :::
+
+## Available Pipes
+- cors
+- helmet
+- parse
+- jwt
+
+### Using cors Pipe
+let's set for example the `cors` Pipe, your `app.ts` now will look like this:
+
+```typescript
+import {App, cors} from 'wind-waker'
+
+// Create a new wind-waker server by instance the App class
+const app = new App();
+
+// Setting cors Pipe at App level.
+// cors Pipe will enable CORS for all requests.
+app.pipeline(cors())
+
+// Start listen to incoming request on port 4000
+app.listen(4000);
+```
 
