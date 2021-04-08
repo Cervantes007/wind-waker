@@ -4,3 +4,6 @@
 
 # wind-waker
 The Fastest Way To Create A Production-Ready Node.js API
+
+## Documentation 
+Visit docs site [here](https://cervantes007.github.io/wind-waker/)
