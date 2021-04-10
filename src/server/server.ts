@@ -6,6 +6,7 @@ import { requestListener } from './request-handler';
 import { Pipe } from '../pipes';
 import { EXTENSION } from '../utils/constants';
 import { actions } from '../actions/actions';
+import { generateClient } from '../utils/client';
 
 export let __app: App;
 
@@ -16,12 +17,14 @@ interface AppOptions {
 export class App {
   private server: Server;
   private _pipes: Pipe[] = [];
-
   constructor(options: AppOptions = {}) {
     loadWindWakerFiles(options.pattern);
     this.server = createServer(requestListener);
     if (!__app) {
       __app = this;
+    }
+    if (process.env.WW_MODE === 'development') {
+      generateClient(this, true);
     }
   }
 
