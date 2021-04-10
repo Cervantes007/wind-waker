@@ -1,57 +1,35 @@
 {
   "name": "wind-waker",
   "version": "0.0.0-semantically-released",
-  "main": "lib/index.js",
-  "types": "lib/types/index.d.ts",
-  "repository": "git@github.com:Cervantes007/wind-waker.git",
   "description": "The Fastest Way To Create A Production-Ready Node.js API",
-  "keywords": [
-    "node",
-    "nodejs",
-    "framework",
-    "typescript",
-    "fast",
-    "blazing",
-    "performance",
-    "decorator"
-  ],
   "author": "Cervantes007",
-  "engines": {
-    "node": ">=12.0.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,ts,tsx}": [
-      "eslint --fix"
-    ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
-  "license": "MIT",
   "scripts": {
-    "api": "ts-node-dev --respawn example/index.ts",
+    "api": "WW_MODE=development ts-node-dev --respawn example/index.ts",
+    "api:client": "WW_MODE=development ts-node-dev --respawn example/index.ts",
+    "client": "ts-node client/generate-client.ts",
     "build": "tsc",
     "commit": "git-cz",
     "docs": "yarn docs:generate && yarn docs:build",
-    "docs:start": "yarn docs:generate && vuepress dev docs",
-    "docs:generate": "rimraf docs && typedoc && cp -r vuepress/* docs/ && cp -r vuepress/.vuepress docs",
-    "docs:dev": "vuepress dev vuepress",
-    "docs:cp": "cp -r vuepress/* docs/",
     "docs:build": "vuepress build docs",
+    "docs:cp": "cp -r vuepress/* docs/",
+    "docs:dev": "vuepress dev vuepress",
+    "docs:generate": "rimraf docs && typedoc && cp -r vuepress/* docs/ && cp -r vuepress/.vuepress docs",
     "docs:serve": "yarn docs && serve docs/.vuepress/dist",
-    "lint": "eslint --ignore-pattern '/lib/' '*/**/*.ts' --quiet --fix",
+    "docs:start": "yarn docs:generate && vuepress dev docs",
     "semver": "semantic-release",
-    "client": "ts-node client/generate-client.ts",
-    "ui": "(cd ui && yarn vite) & yarn api",
     "test": "jest -i",
     "test:coverage": "jest -i --coverage"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "class-transformer": "^0.4.0",
+    "class-validator": "^0.13.1",
+    "co-body": "6.1.0",
+    "cors": "2.8.5",
+    "glob": "^7.1.6",
+    "helmet": "4.4.1",
+    "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^5.0.1",
@@ -83,14 +61,35 @@
     "vuepress-plugin-one-click-copy": "^1.0.2",
     "vuepress-plugin-typedoc": "^0.4.0"
   },
-  "dependencies": {
-    "chalk": "^4.1.0",
-    "class-transformer": "^0.4.0",
-    "class-validator": "^0.13.1",
-    "co-body": "6.1.0",
-    "cors": "2.8.5",
-    "glob": "^7.1.6",
-    "helmet": "4.4.1",
-    "reflect-metadata": "^0.1.13"
-  }
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "keywords": [
+    "node",
+    "nodejs",
+    "framework",
+    "typescript",
+    "fast",
+    "blazing",
+    "performance",
+    "decorator"
+  ],
+  "license": "MIT",
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix"
+    ]
+  },
+  "repository": "git@github.com:Cervantes007/wind-waker.git",
+  "types": "lib/types/index.d.ts"
 }

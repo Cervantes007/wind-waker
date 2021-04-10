@@ -1,4 +1,6 @@
-import { App } from '../src';
+import { App, cors } from '../src';
 const app = new App({ pattern: 'example/**/*.@(actions).ts' });
-console.log(app.actions);
+
+app.pipeline(cors());
+
 export { app };

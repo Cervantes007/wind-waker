@@ -1,4 +1,4 @@
-import { Action, Input, useService } from '../src';
+import { Action, Input, useService, Headers } from '../src';
 import { b } from './pipes';
 import { CatService } from './cat.service';
 
