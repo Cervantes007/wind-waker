@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/Cervantes007/wind-waker/compare/v1.2.0...v1.3.0) (2021-04-10)
+
+
+### Features
+
+* **app:** handle body and other useful configs ([a465d85](https://github.com/Cervantes007/wind-waker/commit/a465d85e79dca8ffacda1fb0e3d57213c4874dd1))
+
 # [1.2.0](https://github.com/Cervantes007/wind-waker/compare/v1.1.0...v1.2.0) (2021-04-08)
 
 
