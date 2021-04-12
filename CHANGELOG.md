@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/Cervantes007/wind-waker/compare/v1.3.0...v1.3.1) (2021-04-12)
+
+
+### Bug Fixes
+
+* **app:** correct way to handle 404 requests ([2c70e16](https://github.com/Cervantes007/wind-waker/commit/2c70e16e59d3cd5bb3f7be86b90a018ac31eb7a1))
+
 # [1.3.0](https://github.com/Cervantes007/wind-waker/compare/v1.2.0...v1.3.0) (2021-04-10)
 
 
