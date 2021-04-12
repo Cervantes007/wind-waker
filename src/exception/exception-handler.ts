@@ -7,7 +7,7 @@ export const exceptionHandler = (e, req, res) => {
       return res.end(JSON.stringify(e.validationErrors) || '');
     }
     res.statusCode = e.code;
-    return res.end(e.message || '');
+    return res.end(JSON.stringify(e) || '');
   }
   res.statusCode = 500;
   return res.end(e.message || 'Internal Server Error');

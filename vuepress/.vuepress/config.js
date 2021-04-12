@@ -18,14 +18,14 @@ module.exports = {
       { text: 'Tools',
         items: [
           {text: 'CLI', link: '/guides/overview.md'},
-          {text: 'App UI', link: '/guides/overview.md'},
+          {text: 'UI', link: '/tools/ui.md'},
           {text: 'Client', link: '/guides/overview.md'},
         ]
       },
-
-      { text: 'Recipes',
+      { text: 'Integrations',
         items: [
-          { text: 'TypeORM', link: '/guides/pipes.md'}
+          { text: 'Databases', link: ''},
+          { text: 'Security', link: ''}
         ]
       },
       { text: 'Github', link: 'https://github.com/cervantes007/wind-waker' },

@@ -5,42 +5,46 @@ import { actions } from '../actions/actions';
 import { __app } from './server';
 import { INPUT_KEY } from '../utils/constants';
 import { Context } from '../context/context';
-import _cors from 'cors';
 
 export const requestListener = async (
   req: IncomingMessage & Record<string, any>,
   res: ServerResponse & Record<string, any>,
 ) => {
-  try {
-    const { url, method } = req;
+  const { url, method } = req;
 
-    if (method === 'OPTIONS') {
-      _cors()(req, res, () => true);
-      return res.end();
-    }
+  let body = '';
 
-    if (method !== 'POST') {
-      throw new MethodNotAllowedError(`Method ${method} isn't supported. Please use POST method.`);
-    }
-    if (url && actions.has(url)) {
-      let body = '';
+  req.on('data', (buffer) => {
+    body += buffer;
+  });
 
-      req.on('data', (buffer) => {
-        body += buffer;
-      });
+  req.on('end', async () => {
+    try {
+      const ctx: Context = { req, res };
+      for (const pipe of __app.pipes || []) {
+        await pipe(ctx);
+      }
+      if (method === 'OPTIONS') {
+        return res.end();
+      }
 
-      req.on('end', async () => {
+      if (method !== 'POST') {
+        throw new MethodNotAllowedError(
+          `Method ${method} isn't supported. Please use POST method.`,
+        );
+      }
+      if (url && actions.has(url)) {
         const endpoint = actions.get(url);
         const fn = typeof endpoint === 'function' ? endpoint : endpoint.fn;
         const endpointPipe = typeof endpoint === 'object' ? endpoint.pipe || [] : [];
-        const ctx: Context = { req, res };
+
         try {
           ctx[INPUT_KEY] = body ? JSON.parse(body) : {};
         } catch (e) {
           throw new BadRequestError(e);
         }
 
-        const pipes = [...(__app.pipes || []), ...endpointPipe];
+        const pipes = [...endpointPipe];
         for (const pipe of pipes) {
           await pipe(ctx);
         }
@@ -51,11 +55,11 @@ export const requestListener = async (
           res.write(typeof result === 'object' ? JSON.stringify(result) : result);
         }
         return res.end();
-      });
-    } else {
-      throw new NotFoundError();
+      } else {
+        exceptionHandler(new NotFoundError(), req, res);
+      }
+    } catch (e) {
+      exceptionHandler(e, req, res);
     }
-  } catch (e) {
-    exceptionHandler(e, req, res);
-  }
+  });
 };
