@@ -28,7 +28,7 @@
     "co-body": "6.1.0",
     "cors": "2.8.5",
     "glob": "^7.1.6",
-    "helmet": "4.4.1",
+    "helmet": "4.5.0",
     "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
