@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/Cervantes007/wind-waker/compare/v1.3.1...v1.4.0) (2021-08-12)
+
+
+### Features
+
+* **wind-waker:** change whole API to functions ([fcd0dd4](https://github.com/Cervantes007/wind-waker/commit/fcd0dd4f98e43a678b27c0f4fff7f6b3d80d3d55))
+
 ## [1.3.1](https://github.com/Cervantes007/wind-waker/compare/v1.3.0...v1.3.1) (2021-04-12)
 
 
