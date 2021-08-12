@@ -1,10 +1,11 @@
 import { IncomingMessage, ServerResponse } from 'http';
+import { URL } from 'url';
 
-export const ctx: Record<string, any> = {};
-
-export type Context = {
+export type Context<T = any> = {
   req: IncomingMessage & Record<string, any>;
   res: ServerResponse & Record<string, any>;
   code?: number;
-  input?: unknown;
-} & Record<string, unknown>;
+  rawBody: string;
+  input?: T;
+  url: URL;
+} & Record<string, any>;

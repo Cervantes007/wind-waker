@@ -1,5 +1,7 @@
-import { Context } from '../';
+import { Context } from '../context';
 
-export const code = (statusCode: number) => (ctx: Context) => {
-  ctx.code = statusCode;
-};
+export const code =
+  (statusCode: number) =>
+  (ctx: Context): void => {
+    ctx.code = statusCode;
+  };

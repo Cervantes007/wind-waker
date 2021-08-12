@@ -1,16 +1,17 @@
 import { IncomingMessage, ServerResponse } from 'http';
-import { BadRequestError, MethodNotAllowedError, NotFoundError } from '../exception/exceptions';
+import stringify from 'fast-safe-stringify';
+import { NotFoundError } from '../exception/exceptions';
 import { exceptionHandler } from '../exception/exception-handler';
-import { actions } from '../actions/actions';
+import { _actions } from '../actions/actions';
 import { __app } from './server';
-import { INPUT_KEY } from '../utils/constants';
-import { Context } from '../context/context';
+import { Context } from '../context';
+import { URL } from 'url';
 
 export const requestListener = async (
   req: IncomingMessage & Record<string, any>,
   res: ServerResponse & Record<string, any>,
-) => {
-  const { url, method } = req;
+): Promise<void> => {
+  const _url = new URL(req.url!, 'http://localhost');
 
   let body = '';
 
@@ -19,47 +20,35 @@ export const requestListener = async (
   });
 
   req.on('end', async () => {
+    const ctx: Context = { req, res, rawBody: body, url: _url };
     try {
-      const ctx: Context = { req, res };
-      for (const pipe of __app.pipes || []) {
-        await pipe(ctx);
-      }
-      if (method === 'OPTIONS') {
-        return res.end();
-      }
+      // if (method === 'OPTIONS') {
+      //   return res.end();
+      // }
+      if (_actions.has(_url.pathname)) {
+        const endpoint = _actions.get(_url.pathname);
+        const fn = typeof endpoint === 'function' ? endpoint : endpoint!.fn;
+        const endpointPipe = typeof endpoint === 'object' ? endpoint!.pipes || [] : [];
 
-      if (method !== 'POST') {
-        throw new MethodNotAllowedError(
-          `Method ${method} isn't supported. Please use POST method.`,
-        );
-      }
-      if (url && actions.has(url)) {
-        const endpoint = actions.get(url);
-        const fn = typeof endpoint === 'function' ? endpoint : endpoint.fn;
-        const endpointPipe = typeof endpoint === 'object' ? endpoint.pipe || [] : [];
+        const pipes: any = [];
+        pipes.push(...__app._pipes);
+        pipes.push(...endpointPipe);
 
-        try {
-          ctx[INPUT_KEY] = body ? JSON.parse(body) : {};
-        } catch (e) {
-          throw new BadRequestError(e);
-        }
-
-        const pipes = [...endpointPipe];
         for (const pipe of pipes) {
           await pipe(ctx);
         }
 
-        const result = await fn(ctx);
+        const result = await fn(ctx.input, ctx);
         res.statusCode = ctx.code || 200;
         if (result) {
-          res.write(typeof result === 'object' ? JSON.stringify(result) : result);
+          res.write(typeof result === 'object' ? stringify(result) : result);
         }
         return res.end();
       } else {
-        exceptionHandler(new NotFoundError(), req, res);
+        exceptionHandler(new NotFoundError(), ctx);
       }
     } catch (e) {
-      exceptionHandler(e, req, res);
+      exceptionHandler(e, ctx);
     }
   });
 };

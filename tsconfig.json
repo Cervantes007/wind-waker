@@ -17,13 +17,5 @@
     "strictPropertyInitialization": false
   },
   "include": ["./src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts"],
-  "typedocOptions": {
-    "entryPoints": ["src/index.ts"],
-    "out": "docs",
-    "name": "Wind Waker",
-    "excludePrivate": true,
-    "disableSources": true,
-    "hideGenerator": true
-  }
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }
