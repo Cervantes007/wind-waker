@@ -102,7 +102,7 @@ dist
 
 .idea
 lib
-docusaurus/build
-docusaurus/docs/api
-docusaurus/node_modules
-docusaurus/.docusaurus
+website/build
+website/docs/api
+website/node_modules
+website/.docusaurus
