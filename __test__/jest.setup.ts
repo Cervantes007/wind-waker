@@ -1,11 +1,10 @@
-import { App } from '../src';
+import { app } from '../example/src/app';
+import { end } from '../src';
 
-let app;
 beforeAll(async () => {
-  app = new App({ pattern: 'example/**/*.@(actions).ts' });
-  await app.listen(4000);
+  await app.start(4000);
 });
 
 afterAll(async () => {
-  await app.close();
+  await end();
 });
