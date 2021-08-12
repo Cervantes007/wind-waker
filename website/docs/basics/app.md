@@ -21,7 +21,7 @@ import {App} from 'wind-waker'
 const app = new App();
 
 // Start listen to incoming request on port 4000
-app.listen(4000);
+app.start(4000);
 ```
 
 ## Loading Actions
@@ -36,17 +36,18 @@ If the [Action](./actions.md) don't exist the App will return a not found respon
 
 ## Start the App
 
-Your `App` will start to listen for incoming requests once the `app.listen()` be executed successfully.
+Your `App` will start to listen for incoming requests once the `app.start()`
+be executed successfully.
 
 ```typescript
 // By default the port will be 4000
-app.listen();
+app.start();
 
 // You can set the port you want your App listen for
-app.listen(5001);
+app.start(5001);
 
 // You can provide feedback when the App is up and running this way:
-app.listen().then(() => console.log(`Wind-Waker is up!`))
+app.start().then(() => console.log(`Wind-Waker is up!`))
 ```
 
 Congratulations, you have your App up and running.

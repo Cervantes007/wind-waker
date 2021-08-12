@@ -9,15 +9,24 @@ import HomepageFeatures from '../components/HomepageFeatures';
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
   return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
+    <header
+      className={clsx('hero hero--primary', styles.heroBanner)}
+      style={{
+        backgroundImage: `linear-gradient(315deg, rgb(0 0 0), rgb(0 0 0 / 50%)),url('/wind-waker/img/ww-bg.jpg')`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+      }}
+    >
       <div className="container">
-        <h1 className="hero__title">{siteConfig.title}</h1>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link className="button button--secondary button--lg" to="/docs/intro">
-            Get Started
-          </Link>
-        </div>
+        <h1 className="hero__title" style={{ margin: 0 }}>
+          {siteConfig.title}
+        </h1>
+        <p className="hero__subtitle" style={{ marginTop: '-15px' }}>
+          Build High-Performance <b style={{ color: 'darkgreen' }}>Nodejs</b> API
+        </p>
+        <Link to="/docs/intro" style={{ color: '#fff' }} className="button button--lg">
+          GET STARTED
+        </Link>
       </div>
     </header>
   );
