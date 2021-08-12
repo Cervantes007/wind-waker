@@ -23,56 +23,32 @@ module.exports = {
         {
           type: 'doc',
           docId: 'intro',
-          position: 'left',
+          position: 'right',
           label: 'Get Started',
         },
         {
-          href: 'https://github.com/cervantes007/wind-waker',
-          label: 'GitHub',
+          type: 'doc',
+          docId: 'overview',
           position: 'right',
+          label: 'Overview',
+        },
+        {
+          type: 'doc',
+          docId: 'basics/app',
+          position: 'right',
+          label: 'Basics',
+        },
+        {
+          href: 'https://github.com/cervantes007/wind-waker',
+          position: 'right',
+          className: 'header-github-link',
+          'aria-label': 'GitHub repository',
         },
       ],
     },
     footer: {
       style: 'dark',
-      links: [
-        {
-          title: 'Docs',
-          items: [
-            {
-              label: 'Tutorial',
-              to: '/docs/intro',
-            },
-          ],
-        },
-        {
-          title: 'Community',
-          items: [
-            {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/wind-waker',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/wind-waker',
-            },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/wind-waker',
-            },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'GitHub',
-              href: 'https://github.com/cervantes007/wind-waker',
-            },
-          ],
-        },
-      ],
-      copyright: `Copyright © ${new Date().getFullYear()} Wind Waker. by Cervantes007, Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Wind Waker, by Cervantes007.`,
     },
     prism: {
       theme: lightCodeTheme,
@@ -86,7 +62,7 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl: 'https://github.com/cervantes007/wind-waker/edit/master/docusaurus/',
+          editUrl: 'https://github.com/cervantes007/wind-waker/edit/master/website/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

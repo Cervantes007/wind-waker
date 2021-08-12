@@ -4,42 +4,42 @@ import styles from './HomepageFeatures.module.css';
 
 const FeatureList = [
   {
-    title: 'Easy to Use',
-    Svg: require('../../static/img/undraw_docusaurus_mountain.svg').default,
+    title: 'Easy to Learn',
+    src: require('../../static/img/ww-bow-feature.png').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Wind Waker was designed with the simplest API possible, enabling developers to build web
+        servers in no time.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('../../static/img/undraw_docusaurus_tree.svg').default,
+    title: 'High Performance',
+    src: require('../../static/img/ww-hook-feature.png').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Wind Waker was implemented from scratch to be one of the fastest alternatives for Nodejs
+        Developers.
       </>
     ),
   },
   {
-    title: 'Powered by React',
-    Svg: require('../../static/img/undraw_docusaurus_react.svg').default,
+    title: 'Production Ready',
+    src: require('../../static/img/ww-shield-sword-feature.png').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Wind Waker is easy to learn, write, scale and deploy, our docs will provide you everything
+        you need to build a rock solid web server.
       </>
     ),
   },
 ];
 
-function Feature({Svg, title, description}) {
+function Feature({ src, title, description }) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
-        <Svg className={styles.featureSvg} alt={title} />
+        <img src={src} alt={title} width={175} />
       </div>
       <div className="text--center padding-horiz--md">
         <h3>{title}</h3>
