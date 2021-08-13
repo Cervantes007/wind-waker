@@ -1,3 +1,15 @@
+# [1.5.0](https://github.com/Cervantes007/wind-waker/compare/v1.4.0...v1.5.0) (2021-08-13)
+
+
+### Bug Fixes
+
+* **yarn:** update yarn.lock ([0e41241](https://github.com/Cervantes007/wind-waker/commit/0e41241f8481f5f1605854c62cb170d3467695b2))
+
+
+### Features
+
+* **wind-waker:** internal improvements and some docs updates ([acf034a](https://github.com/Cervantes007/wind-waker/commit/acf034ac2a633065e83f3e94b7cbf1b9a8c84513))
+
 # [1.4.0](https://github.com/Cervantes007/wind-waker/compare/v1.3.1...v1.4.0) (2021-08-12)
 
 
