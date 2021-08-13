@@ -1,5 +1,4 @@
-import { default as axios } from 'axios';
+import { Client } from 'wind-waker-client';
 
-axios.defaults.baseURL = 'http://localhost:4000';
-
-export { axios };
+const client = new Client({ baseURL: 'http://localhost:4000' });
+export const request = client.request;

@@ -1,7 +1,7 @@
-import { axios } from './client';
+import { request } from './client';
 
 test('getUsers', async () => {
-  const response = await axios.request({ method: 'POST', url: '/getUsers' });
+  const response = await request('getUsers');
   expect(response.status).toBe(200);
   expect(response.data.items).toBe('getUsers');
 });
