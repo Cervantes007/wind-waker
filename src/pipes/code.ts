@@ -1,7 +1,7 @@
 import { Context } from '../context';
 
-export const code =
+export const $code =
   (statusCode: number) =>
-  (ctx: Context): void => {
-    ctx.code = statusCode;
+  ({ res }: Context): void => {
+    res.statusCode = statusCode;
   };

@@ -1,6 +1,5 @@
 import { createServer, globalAgent, Server } from 'http';
 import glob, { IOptions as GlobOptions } from 'glob';
-import chalk from 'chalk';
 import path from 'path';
 import { requestListener } from './request-handler';
 import { Pipe } from '../pipes';
@@ -16,6 +15,7 @@ export let __app: App;
 interface AppOptions {
   pattern?: string;
   noInput?: boolean;
+  ui?: boolean;
 }
 
 export class App {
@@ -29,6 +29,16 @@ export class App {
     }
     if (!options.noInput) {
       this.pipeline($input);
+    }
+
+    if (options.ui) {
+      this.action('wwActions', () => {
+        const wwActions: any = [];
+        for (const [name] of this.actions.entries()) {
+          wwActions.push({ name });
+        }
+        return wwActions;
+      });
     }
   }
 
@@ -82,13 +92,11 @@ export const start = (port = 4000, options: AppOptions = {}): Promise<App> => {
 
 export const end = (): Promise<App> => __app.end();
 
-const loadWindWakerFiles = (
-  pattern = `src/**/*.@(${EXTENSION}).ts`,
-  options: GlobOptions = { matchBase: true },
-) => {
-  process.env.NODE_ENV !== 'test' && console.log(chalk.bold.blue('Loading Wind-Waker Files:'));
-  glob.sync(pattern, options).forEach(async function (file) {
-    process.env.NODE_ENV !== 'test' && console.log(chalk.green(`-> ${file}`));
+const loadWindWakerFiles = (pattern?: string, options: GlobOptions = { matchBase: true }) => {
+  const _pattern =
+    pattern ||
+    `${process.env.NODE_ENV === 'production' ? 'build' : 'src'}/**/*.@(${EXTENSION}).@(ts|js)`;
+  glob.sync(_pattern, options).forEach(async function (file) {
     const actions = await import(path.resolve(file));
     for (const key in actions) {
       const _action = actions[key];

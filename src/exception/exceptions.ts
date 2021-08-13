@@ -3,6 +3,12 @@ export class WindWakerError extends Error {
   code = 500;
 }
 
+export class WindWakerAbort extends Error {
+  name = 'WindWakerExit';
+  message = 'Aborted';
+  code = 200;
+}
+
 export class NotFoundError extends WindWakerError {
   name = 'NotFoundError';
   message = 'Not Found';

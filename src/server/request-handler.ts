@@ -11,7 +11,7 @@ export const requestListener = async (
   req: IncomingMessage & Record<string, any>,
   res: ServerResponse & Record<string, any>,
 ): Promise<void> => {
-  const _url = new URL(req.url!, 'http://localhost');
+  const _url = new URL(req.url!, `http://${req.headers.host}`);
 
   let body = '';
 
@@ -22,13 +22,10 @@ export const requestListener = async (
   req.on('end', async () => {
     const ctx: Context = { req, res, rawBody: body, url: _url };
     try {
-      // if (method === 'OPTIONS') {
-      //   return res.end();
-      // }
       if (_actions.has(_url.pathname)) {
         const endpoint = _actions.get(_url.pathname);
         const fn = typeof endpoint === 'function' ? endpoint : endpoint!.fn;
-        const endpointPipe = typeof endpoint === 'object' ? endpoint!.pipes || [] : [];
+        const endpointPipe = typeof endpoint === 'object' ? endpoint.pipes || [] : [];
 
         const pipes: any = [];
         pipes.push(...__app._pipes);
@@ -39,10 +36,7 @@ export const requestListener = async (
         }
 
         const result = await fn(ctx.input, ctx);
-        res.statusCode = ctx.code || 200;
-        if (result) {
-          res.write(typeof result === 'object' ? stringify(result) : result);
-        }
+        res.write(typeof result === 'object' ? stringify(result) : result);
         return res.end();
       } else {
         exceptionHandler(new NotFoundError(), ctx);

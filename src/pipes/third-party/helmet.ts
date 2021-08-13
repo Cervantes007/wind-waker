@@ -25,4 +25,4 @@ interface HelmetOptions {
   xssFilter?: MiddlewareOption<never>;
 }
 
-export const helmet = (options: HelmetOptions = {}) => express(_helmet(options));
+export const $helmet = (options: HelmetOptions = {}) => express(_helmet(options));
