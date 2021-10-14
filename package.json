@@ -22,7 +22,7 @@
     "class-validator": "0.13.1",
     "cors": "2.8.5",
     "fast-safe-stringify": "2.0.8",
-    "glob": "7.1.7",
+    "glob": "7.2.0",
     "helmet": "4.6.0",
     "pino": "6.13.0",
     "pino-http": "5.6.0"
