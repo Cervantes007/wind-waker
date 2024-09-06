@@ -19,7 +19,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "class-transformer": "0.4.0",
-    "class-validator": "0.13.1",
+    "class-validator": "0.13.2",
     "cors": "2.8.5",
     "fast-safe-stringify": "2.0.8",
     "glob": "7.1.7",
